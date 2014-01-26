@@ -15,6 +15,12 @@
   <%= @brewery.beers.count %>
 </p>
 
+<% if @brewery.ratings.empty? %>
+    <p>Hipshei ei ratingeja</p>
+<% else %>
+    <p><%= @brewery.average_rating %></p>
+<% end %>
+
 <p>
   <% @brewery.beers.each do |beer| %>
     <%= link_to '' + beer.name, beer %>
