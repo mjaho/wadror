@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   include RatingAverage
   has_many :beers, through: :ratings
   has_many :memberships, dependent: :destroy
-  has_many :beer_clubs, through: :memberships, :uniq => true
+  has_many :beer_clubs, through: :memberships
   has_many :ratings, dependent: :destroy
   has_secure_password
 
@@ -21,12 +21,29 @@ class User < ActiveRecord::Base
 
   def favorite_style
     return nil if ratings.empty?
-    style_ratings = ratings.group_by { |rating| rating.beer.style }
-    style_ratings = style_ratings.each_pair{|style, score| style_ratings[style] = score.sum(&:score) / score.size}
-    return style_ratings.sort_by{ |style, score| score}.last[0]
+    beer_ratings_by_style = ratings.group_by { |r| r.beer.style }
+    find_highest_average(beer_ratings_by_style)
   end
 
   def favorite_brewery
+    return nil if ratings.empty?
+    beer_ratings_by_brewery = ratings.group_by { |r| r.beer.brewery }
+    find_highest_average(beer_ratings_by_brewery)
+  end
+
+  def find_highest_average(ratings)
+    fav = nil
+    highest = -1
+
+    ratings.each do |r|
+      avg = r[1].inject(0){ | sum, rating | sum + rating.score } / r[1].length.to_f
+      if avg > highest
+        fav = r[0]
+        highest = avg
+      end
+    end
+
+    return fav
   end
 
 end

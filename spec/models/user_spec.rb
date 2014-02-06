@@ -36,9 +36,11 @@ describe User do
       user.should respond_to :favorite_style
     end
 
-    #it "has the correct one" do
-    #create_beers_with_ratings
-    #end
+    it "has the correct one" do
+      create_beers_with_ratings_and_style(40, 50, 40, 50, user, "IPA")
+      create_beers_with_ratings_and_style(20, 30, 40, 20, user, "Stout")
+      expect(user.favorite_style).to eq("IPA")
+    end
 
   end
 
@@ -49,18 +51,26 @@ describe User do
       user.should respond_to :favorite_brewery
     end
 
+    it "has the correct one" do
+      brewery1 = FactoryGirl.create(:brewery, name:"Lempipanimo")
+      brewery2 = FactoryGirl.create(:brewery, name:"Ihankivapanimo")
+      create_beers_with_ratings_and_brewery(40, 50, 40, 50, user, brewery1)
+      create_beers_with_ratings_and_brewery(20, 30, 40, 20, user, brewery2)
+      expect(user.favorite_brewery.name).to eq("Lempipanimo")
+    end
+
   end
 
   describe "Favorite beer" do
     let(:user){FactoryGirl.create(:user)}
 
-      it "has method for determining one" do
-        user.should respond_to :favorite_beer
-      end
+    it "has method for determining one" do
+      user.should respond_to :favorite_beer
+    end
 
-      it "without ratings does not have one" do
-        expect(user.favorite_beer).to eq(nil)
-      end
+    it "without ratings does not have one" do
+      expect(user.favorite_beer).to eq(nil)
+    end
 
     it "is the only rated if only one rating" do
       beer = FactoryGirl.create(:beer)
@@ -121,10 +131,28 @@ describe User do
     end
   end
 
-  def create_beer_with_rating_and_style
+  def create_beer_with_rating_and_style(score, style, user)
+    beer = FactoryGirl.create(:beer, style:style)
+    FactoryGirl.create(:rating, score:score, user:user, beer:beer)
+    beer
   end
 
-  def create_beers_with_ratings_and_styles
+  def create_beers_with_ratings_and_style(*scores, user, style)
+    scores.each do |score|
+      create_beer_with_rating_and_style(score, style, user)
+    end
+  end
+
+  def create_beer_with_rating_and_brewery(score, brewery, user)
+    beer = FactoryGirl.create(:beer, brewery:brewery)
+    FactoryGirl.create(:rating, score:score, user:user, beer:beer)
+    beer
+  end
+
+  def create_beers_with_ratings_and_brewery(*scores, user, brewery)
+    scores.each do |score|
+      create_beer_with_rating_and_brewery(score, brewery, user)
+    end
   end
 
 end

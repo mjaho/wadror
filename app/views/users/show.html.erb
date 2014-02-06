@@ -8,19 +8,32 @@
 <% if @user.ratings.empty? %>
     <p>No ratings yet</p>
 <% else %>
+    <p>Number of ratings: <%= @user.ratings.count %> </p>
     <p><%= @user.average_rating %></p>
 <% end %>
 
-<ul>
 
-<% @user.ratings.each do |rating| %>
-    <li><%= rating.beer.name %> <%= rating.score %>
-      <% if @user == current_user %>
-        <%= link_to 'delete', rating, method: :delete,  data: { confirm: 'Are you sure?' } %>
+<% if not @user.ratings.empty? %>
+    <ul class="ratings">
+    <% @user.ratings.each do |rating| %>
+        <li><%= rating.beer.name %> <%= rating.score %>
+          <% if @user == current_user %>
+            <%= link_to 'delete', rating, method: :delete,  data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </li>
       <% end %>
-    </li>
-  <% end %>
-</ul>
+    </ul>
+
+    <p>
+      <strong>Favorite style:</strong>
+      <%= @user.favorite_style %>
+    </p>
+
+    <p>
+      <strong>Favorite brewery:</strong>
+      <%= @user.favorite_brewery.name %>
+    </p>
+<% end %>
 
 <p>
   <strong>Beer Clubs:</strong>

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Beer" do
+describe "Beer page" do
   before :each do
     #FactoryGirl.create :user
     #sign_in(username:"Pekka", password:"Foobar1")
@@ -19,7 +19,7 @@ describe "Beer" do
 
     end
 
-    it "cannot be created if name is nil" do
+    it "cannot be created if name is nil and redirects appropriately" do
       visit new_beer_path
       expect{
         click_button('Create Beer')
