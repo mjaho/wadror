@@ -1,10 +1,17 @@
 language: ruby
-
 rvm:
- - 2.0.0
-
+- 2.0.0
 script:
- - bundle exec rake db:migrate --trace
- - RAILS_ENV=test bundle exec rake db:migrate --trace
- - bundle exec rake db:test:prepare
- - bundle exec rspec -fd spec/
+- bundle exec rake db:migrate --trace
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+- bundle exec rake db:test:prepare
+- bundle exec rspec -fd spec/
+deploy:
+  provider: heroku
+  api_key:
+    secure: DjAm+7HCAkacqqncLqmFzLlSMnsqTh85rzl4uRlLHktFrHrU/Pc5oIQV+felELXan83xIx0NqueLxl+Mrk4ojIh/Y+8SS9rcB6QUSCRWCK3hluOkRhsg9dU7C3rHAKv0bL0xB9sqJmbgR/khARSyZWK7A2JN6km67uDEdCavPHc=
+  run:
+      - "rake db:migrate"
+  app: whispering-bastion-5373
+  on:
+    repo: mjaho/wadror
