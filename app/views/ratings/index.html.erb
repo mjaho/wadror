@@ -3,12 +3,13 @@
 <p>To be completed...</p>
 
 <% if not @ratings.empty? %>
-<p> Number of ratings: <%= @ratings.count%> </p>
-<% end %>
-<%= link_to 'Add a new rating', new_rating_path %>
+    <p> Number of ratings: <%= @ratings.count%> </p>
 
-<ul>
-  <% @ratings.each do |rating| %>
-      <li> <%= rating %> <%= link_to rating.user.username, rating.user %> </li>
-  <% end %>
-</ul>
+    <%= link_to 'Add a new rating', new_rating_path %>
+
+    <ul>
+      <% @ratings.each do |rating| %>
+          <li> <%= rating %> <%= link_to rating.user.username, rating.user %> </li>
+      <% end %>
+    </ul>
+<% end %>
