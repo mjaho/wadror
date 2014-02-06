@@ -33,5 +33,21 @@ describe "User page" do
       expect(page).to have_content "Number of ratings: 2"
     end
 
+    it "displays users favorite style" do
+      create_beers_with_ratings_and_style(40, 50, 40, 50, user, "IPA")
+      create_beers_with_ratings_and_style(20, 30, 40, 20, user, "Stout")
+      visit user_path(user)
+      expect(page).to have_content "Favorite style: IPA"
+    end
+
+    it "displays users favorite brewery" do
+      brewery1 = FactoryGirl.create(:brewery, name:"Lempipanimo")
+      brewery2 = FactoryGirl.create(:brewery, name:"Ihankivapanimo")
+      create_beers_with_ratings_and_brewery(40, 50, 40, 50, user, brewery1)
+      create_beers_with_ratings_and_brewery(20, 30, 40, 20, user, brewery2)
+      visit user_path(user)
+      expect(page).to have_content "Favorite brewery: Lempipanimo"
+    end
+
 
 end
