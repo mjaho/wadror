@@ -2,7 +2,7 @@
 
 <p>To be completed...</p>
 
-<% if not @user.ratings.empty? %>
+<% if not @ratings.empty? %>
 <p> Number of ratings: <%= @ratings.count%> </p>
 <% end %>
 <%= link_to 'Add a new rating', new_rating_path %>
