@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe "Beer page" do
   before :each do
-    #FactoryGirl.create :user
-    #sign_in(username:"Pekka", password:"Foobar1")
+    FactoryGirl.create :user
+    sign_in(username:"Pekka", password:"Foobar1")
   end
 
   describe "new" do
