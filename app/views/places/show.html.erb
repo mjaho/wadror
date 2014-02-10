@@ -1,0 +1,9 @@
+<% if @place %>
+    <h1><%= @place.name %></h1>
+
+    <%= @place.street %><br/>
+
+    <%= @place.zip %>&nbsp;<%= @place.city %><br/>
+
+    <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="<%= @place.blogmap %>"></iframe>
+<% end %>
