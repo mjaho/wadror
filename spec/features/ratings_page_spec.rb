@@ -5,7 +5,8 @@ describe "Ratings page" do
     user = FactoryGirl.create(:user)
     sign_in(username:"Pekka", password:"Foobar1")
     brewery = FactoryGirl.create(:brewery)
-    beer = FactoryGirl.create(:beer, name:"iso 3", brewery:brewery)
+    s1 = FactoryGirl.create(:style)
+    beer = FactoryGirl.create(:beer, name:"iso 3", style: s1, brewery:brewery)
     FactoryGirl.create(:rating, beer:beer, user:user)
     FactoryGirl.create(:rating2, beer:beer, user:user)
   end

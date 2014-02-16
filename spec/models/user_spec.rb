@@ -55,7 +55,7 @@ describe User do
     it "has the correct one" do
       create_beers_with_ratings_and_style(40, 50, 40, 50, user, "IPA")
       create_beers_with_ratings_and_style(20, 30, 40, 20, user, "Stout")
-      expect(user.favorite_style).to eq("IPA")
+      expect(user.favorite_style.style).to eq("IPA")
     end
 
   end
@@ -89,7 +89,8 @@ describe User do
     end
 
     it "is the only rated if only one rating" do
-      beer = FactoryGirl.create(:beer)
+      style = FactoryGirl.create(:style)
+      beer = FactoryGirl.create(:beer, style:style)
       rating = FactoryGirl.create(:rating, beer:beer, user:user)
 
       expect(user.favorite_beer).to eq(beer)

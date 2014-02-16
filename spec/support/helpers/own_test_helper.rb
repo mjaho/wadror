@@ -8,7 +8,8 @@ module OwnTestHelper
   end
 
   def create_beer_with_rating(score, user)
-    beer = FactoryGirl.create(:beer)
+    style = FactoryGirl.create(:style)
+    beer = FactoryGirl.create(:beer, style:style)
     FactoryGirl.create(:rating, score:score, beer:beer, user:user)
     beer
   end
@@ -26,13 +27,15 @@ module OwnTestHelper
   end
 
   def create_beers_with_ratings_and_style(*scores, user, style)
+    s1 = FactoryGirl.create(:style, style: style)
     scores.each do |score|
-      create_beer_with_rating_and_style(score, style, user)
+      create_beer_with_rating_and_style(score, s1, user)
     end
   end
 
   def create_beer_with_rating_and_brewery(score, brewery, user)
-    beer = FactoryGirl.create(:beer, brewery:brewery)
+    s1 = FactoryGirl.create(:style)
+    beer = FactoryGirl.create(:beer, style: s1, brewery:brewery)
     FactoryGirl.create(:rating, score:score, user:user, beer:beer)
     beer
   end

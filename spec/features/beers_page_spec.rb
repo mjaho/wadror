@@ -9,9 +9,10 @@ describe "Beer page" do
   describe "new" do
     it "can be created if name is valid" do
       FactoryGirl.create(:brewery)
+      FactoryGirl.create(:style)
       visit new_beer_path
       fill_in('beer_name', with:'Testi')
-      select('Weizen', from:'beer[style]')
+      select('IPA', from:'beer[style_id]')
       select('anonymous', from:'beer[brewery_id]')
       expect{
         click_button('Create Beer')

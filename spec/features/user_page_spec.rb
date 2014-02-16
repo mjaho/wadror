@@ -4,8 +4,9 @@ describe "User page" do
 
     let!(:user) { FactoryGirl.create :user }
     let!(:otheruser) { FactoryGirl.create :user, username:'otheruser' }
-    let!(:beer) { FactoryGirl.create :beer, name:"iso 3" }
-    let!(:beer2) { FactoryGirl.create :beer, name:"karhu" }
+    let!(:style) { FactoryGirl.create :style }
+    let!(:beer) { FactoryGirl.create :beer, name:"iso 3", style:style }
+    let!(:beer2) { FactoryGirl.create :beer, name:"karhu", style:style }
     let!(:rating) { FactoryGirl.create :rating, user:user, beer:beer }
     let!(:rating2) { FactoryGirl.create :rating, user:user, beer:beer }
     let!(:rating3) { FactoryGirl.create :rating, user:otheruser, beer:beer2 }
