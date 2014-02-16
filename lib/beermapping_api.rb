@@ -23,6 +23,8 @@ class BeermappingApi
   end
 
   def self.key
-    Settings.beermapping_apikey
+    #Ilmeisesti herokussa ei toimi settingsin kautta. Vaihtoehtoina käyttää
+    #Settings.beermapping_apikey
+    "b65607149f4bcfd5bcc268f9ebc6942e"
   end
 end
