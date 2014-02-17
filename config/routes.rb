@@ -34,6 +34,14 @@ Ratebeer::Application.routes.draw do
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
 
+  get 'beerlist', to:'beers#list'
+
+  #get 'brewerylist', to:'breweries#list'
+
+  get 'ngbrewerylist', to:'breweries#nglist'
+
+  get 'ngbeerlist', to:'beers#nglist'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
