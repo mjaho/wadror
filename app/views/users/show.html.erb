@@ -18,7 +18,7 @@
     <% @user.ratings.each do |rating| %>
         <li><%= rating.beer.name %> <%= rating.score %>
           <% if @user == current_user %>
-            <%= link_to 'delete', rating, method: :delete,  data: { confirm: 'Are you sure?' } %>
+            <%= link_to 'delete', rating, class:'btn btn-danger', method: :delete,  data: { confirm: 'Are you sure?' } %>
           <% end %>
         </li>
       <% end %>

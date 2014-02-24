@@ -1,6 +1,6 @@
 <h1>Listing styles</h1>
 
-<table>
+<table class="table table-bordered">
   <thead>
     <tr>
       <th>Style</th>
@@ -16,9 +16,9 @@
       <tr>
         <td><%= style.style %></td>
         <td><%= style.description %></td>
-        <td><%= link_to 'Show', style %></td>
-        <td><%= link_to 'Edit', edit_style_path(style) %></td>
-        <td><%= link_to 'Destroy', style, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', style, class:'btn btn-default' %></td>
+        <td><%= link_to 'Edit', edit_style_path(style), class:'btn btn-info' %></td>
+        <td><%= link_to 'Destroy', style, class:'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

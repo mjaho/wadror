@@ -1,0 +1,15 @@
+<% if not current_user.nil? %>
+    <li class="dropdown">
+        <a data-toggle="dropdown" href="#"><%= current_user.username %></a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+          <li><%= link_to 'my page', current_user %></li>
+          <li><%= link_to 'rate a beer', new_rating_path %></li>
+          <li><%= link_to 'join a club', new_membership_path %></li>
+          <li class="divider"></li>
+          <li><%= link_to 'signout', signout_path, method: :delete %></li>
+        </ul>
+    </li>
+<% else %>
+    <li><%= link_to 'signin', signin_path %></li>
+    <li><%= link_to 'signup', signup_path %></li>
+<% end %>
